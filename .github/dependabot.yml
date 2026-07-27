@@ -4,15 +4,13 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # revm/Alloy compatibility is version-sensitive; accept patch updates only.
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
   - package-ecosystem: npm
     directory: /crates/safe-node-revm-wasm
-    schedule:
-      interval: weekly
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
-  - package-ecosystem: gitsubmodule
-    directory: /
     schedule:
       interval: weekly
