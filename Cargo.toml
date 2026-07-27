@@ -21,7 +21,7 @@ alloy-primitives = { version = "=1.6.1", features = ["serde"] }
 alloy-rlp = "0.3.16"
 alloy-trie = { version = "=0.9.5", features = ["ethereum"] }
 async-trait = "0.1.89"
-base64 = "0.22.1"
+base64 = "0.23.0"
 clap = { version = "4.5.51", features = ["derive", "env"] }
 hex = "0.4.3"
 revm = { version = "=42.0.1", default-features = false, features = ["std"] }
