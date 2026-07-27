@@ -41,7 +41,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@1.91.1
         with:
           targets: wasm32-unknown-unknown
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
