@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: dtolnay/rust-toolchain@1.91.1
+        with:
+          targets: wasm32-unknown-unknown
+          components: rustfmt, clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace
+      - run: RUSTDOCFLAGS='-D warnings' cargo doc --workspace --no-deps
+      - run: cargo check -p safe-node-revm-wasm --target wasm32-unknown-unknown
+      - uses: EmbarkStudios/cargo-deny-action@v2
+
+  browser:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: crates/safe-node-revm-wasm
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: dtolnay/rust-toolchain@1.91.1
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: crates/safe-node-revm-wasm/package-lock.json
+      # npm currently omits non-host optional @infisical/quic packages from
+      # generated locks, so `npm ci` rejects the otherwise valid KPS tree.
+      - run: npm install --include=dev
+      - run: npm audit --audit-level=high
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:pinning
+      - run: cargo install wasm-pack --version 0.15.0 --locked
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+
+  # The live Safe Node test is intentionally absent. Run it manually only after
+  # fresh TDX verification with SAFE_NODE_INTEGRATION=1 and SAFE_NODE_TLS_PIN.

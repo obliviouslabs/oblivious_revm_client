@@ -1,0 +1,30 @@
+[package]
+name = "safe-node-revm-wasm"
+description = "Browser WASM replay adapter for Safe Node and revm"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+readme.workspace = true
+repository.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# Newer Rust releases can emit bulk-memory operations that wasm-pack 0.15's
+# bundled wasm-opt does not enable during validation. Browsers support them.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[dependencies]
+revm.workspace = true
+safe-node-revm = { path = "../safe-node-revm", version = "0.1.0" }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+wasm-bindgen = "0.2.106"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2.16", features = ["js"] }

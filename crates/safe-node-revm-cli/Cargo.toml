@@ -1,0 +1,27 @@
+[package]
+name = "safe-node-revm-cli"
+description = "Native Safe Node attestation and revm example"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+readme.workspace = true
+repository.workspace = true
+publish = false
+
+[[bin]]
+name = "safe-revm"
+path = "src/main.rs"
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+rand.workspace = true
+reqwest = { version = "0.12.28", default-features = false, features = ["json", "rustls-tls-manual-roots"] }
+revm.workspace = true
+safe-node-revm = { path = "../safe-node-revm", version = "0.1.0" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+tokio.workspace = true

@@ -1,0 +1,42 @@
+{
+  "name": "@obliviouslabs/safe-node-revm",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Browser WASM and KPS transport for the Safe Node revm adapter",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/obliviouslabs/oblivious_revm_client.git",
+    "directory": "crates/safe-node-revm-wasm"
+  },
+  "bugs": {
+    "url": "https://github.com/obliviouslabs/oblivious_revm_client/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./js/index.js"
+  },
+  "scripts": {
+    "build:wasm": "wasm-pack build --target web --out-dir pkg",
+    "lint": "biome check js",
+    "test": "node --test js/index.test.mjs",
+    "test:pinning": "node --test js/pinning-docker.test.mjs",
+    "test:browser": "npm run build:wasm && playwright test",
+    "proxy": "node js/kps-safe-proxy.mjs"
+  },
+  "dependencies": {
+    "@kpstreams/server": "0.2.1",
+    "@kpstreams/webrtc-client": "0.2.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.5",
+    "@playwright/test": "1.62.0"
+  },
+  "allowScripts": {
+    "node-datachannel@0.32.3": true,
+    "ip-num@1.6.1": true
+  }
+}

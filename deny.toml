@@ -1,0 +1,31 @@
+[advisories]
+# `paste` is a transitive dependency of the pinned Alloy/revm release. The
+# advisory is unmaintained-only, has no vulnerability, and has no compatible
+# upgrade path at this revision.
+ignore = [
+    { id = "RUSTSEC-2024-0436", reason = "transitive Alloy dependency; no safe upgrade is available" },
+]
+
+[bans]
+multiple-versions = "allow"
+wildcards = "allow"
+
+[licenses]
+confidence-threshold = 0.8
+allow = [
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "CC0-1.0",
+    "ISC",
+    "MIT",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
