@@ -3043,7 +3043,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "clap",
- "rand 0.9.5",
+ "rand 0.10.2",
  "reqwest",
  "revm",
  "safe-node-revm",
