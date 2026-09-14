@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.5",
-    "@playwright/test": "1.62.0"
+    "@playwright/test": "1.63.0"
   },
   "allowScripts": {
     "node-datachannel@0.32.3": true,
