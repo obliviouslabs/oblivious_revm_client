@@ -19,7 +19,7 @@ repository = "https://github.com/obliviouslabs/oblivious_revm_client"
 anyhow = "1.0.100"
 alloy-primitives = { version = "=1.6.1", features = ["serde"] }
 alloy-rlp = "0.3.16"
-alloy-trie = { version = "=0.9.5", features = ["ethereum"] }
+alloy-trie = { version = "=0.9.7", features = ["ethereum"] }
 async-trait = "0.1.89"
 base64 = "0.22.1"
 clap = { version = "4.5.51", features = ["derive", "env"] }
