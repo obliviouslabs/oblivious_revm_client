@@ -32,7 +32,7 @@
     "@kpstreams/webrtc-client": "0.2.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.5",
+    "@biomejs/biome": "2.5.15",
     "@playwright/test": "1.62.0"
   },
   "allowScripts": {
